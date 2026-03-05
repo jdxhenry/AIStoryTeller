@@ -68,7 +68,7 @@ const Reader: React.FC<ReaderProps> = ({
       </div>
 
       {/* Content Area */}
-      <div className="flex-1 px-6 pt-8 pb-32 overflow-y-auto hide-scrollbar">
+      <div className="flex-1 min-h-0 px-6 pt-8 pb-32 overflow-y-auto hide-scrollbar">
         <h1 className="serif text-2xl font-bold text-stone-900 mb-6 leading-tight opacity-90">{story.title}</h1>
         <div className="space-y-6">
           {story.segments.map((segment, idx) => {

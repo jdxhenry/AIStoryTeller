@@ -145,7 +145,7 @@ const App: React.FC = () => {
     setIsFetchingUrl(true);
     setError(null);
     try {
-      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+      const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
       const response = await ai.models.generateContent({
         model: 'gemini-3-flash-preview',
         contents: `Extract the main story text content from: ${urlInput}. Return ONLY the core text, no metadata.`,
@@ -245,16 +245,16 @@ const App: React.FC = () => {
   }, [playback.currentSegmentIndex, playback.isPlaying, playSegment, story]);
 
   return (
-    <div className="h-screen w-full flex flex-col bg-[#FDFCFB] overflow-hidden safe-pb">
+    <div className="h-[100dvh] w-full flex flex-col bg-[#FDFCFB] overflow-hidden safe-pb">
       {!story ? (
-        <div className="flex-1 flex flex-col px-8 pt-12 pb-8 max-w-lg mx-auto w-full relative">
+        <div className="flex-1 min-h-0 flex flex-col px-8 pt-12 pb-8 max-w-lg mx-auto w-full relative">
           <div className="mb-8 animate-in fade-in slide-in-from-top-4 duration-1000">
             <h2 className="serif text-5xl font-bold text-stone-900 leading-[1.1] tracking-tight">
               Quiet moments, <br/><span className="italic font-normal text-stone-400">narrated.</span>
             </h2>
           </div>
 
-          <div className="flex flex-col gap-4 flex-1 overflow-y-auto hide-scrollbar pb-10">
+          <div className="flex flex-col gap-4 flex-1 min-h-0 overflow-y-auto hide-scrollbar pb-10">
             <label className="bg-white rounded-[2rem] p-5 flex items-center gap-6 shadow-xl shadow-stone-200/40 border border-stone-50 group hover:scale-[1.01] transition-all cursor-pointer">
               <input type="file" className="hidden" accept=".pdf,.docx,.txt" onChange={async (e) => {
                  const file = e.target.files?.[0];
