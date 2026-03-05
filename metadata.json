@@ -1,0 +1,8 @@
+{
+  "name": "Book Reader",
+  "description": "A high-fidelity storytelling studio with native Android support for offline playback and tactile feedback.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}

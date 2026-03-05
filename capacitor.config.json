@@ -1,0 +1,10 @@
+
+{
+  "appId": "com.kittenreader.app",
+  "appName": "KittenReader",
+  "webDir": "dist",
+  "bundledWebRuntime": false,
+  "server": {
+    "androidScheme": "https"
+  }
+}

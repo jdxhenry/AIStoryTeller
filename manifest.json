@@ -1,0 +1,19 @@
+
+{
+  "name": "KittenReader",
+  "short_name": "KittenReader",
+  "description": "Your personal offline narrator for PDF, Word, and Web stories.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#FDFCFB",
+  "theme_color": "#8B5CF6",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/3503/3503827.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
