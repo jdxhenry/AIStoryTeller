@@ -63,7 +63,8 @@ function decodeBase64(base64: string): Uint8Array {
  * Generates audio for a single text chunk.
  */
 export async function generateChunkAudio(text: string, voiceName: string = 'Kore'): Promise<Int16Array> {
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+  const apiKey = process.env.GEMINI_API_KEY || process.env.API_KEY || '';
+  const ai = new GoogleGenAI({ apiKey });
   
   const response = await ai.models.generateContent({
     model: "gemini-2.5-flash-preview-tts",

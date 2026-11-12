@@ -238,6 +238,37 @@ const App: React.FC = () => {
     }
   }, [story, voices, playback.voiceURI, playback.speed, volume, stopAudio]);
 
+  const handleReplaceContent = useCallback((newText: string) => {
+    stopAudio();
+    if (!newText.trim()) {
+      setError({ message: "Content cannot be empty.", type: 'file' });
+      return;
+    }
+    const segments = segmentText(newText);
+    if (segments.length === 0) {
+      setError({ message: "Could not find any readable text in this document.", type: 'file' });
+      return;
+    }
+    const firstLine = newText.trim().split('\n')[0].replace(/^[#*\s-]+/, '').trim();
+    const newTitle = firstLine.length > 0 && firstLine.length < 50 ? firstLine : (story?.title || "Reading Content");
+    const storyId = btoa(encodeURIComponent(newTitle + newText.slice(0, 20))).slice(0, 32);
+    
+    const newStory: Story = {
+      id: storyId,
+      title: newTitle,
+      content: newText,
+      segments: segments.map((s, idx) => ({ id: `${storyId}-${idx}`, text: s, status: 'idle' }))
+    };
+
+    setStory(newStory);
+    setPlayback(prev => ({
+      ...prev,
+      currentSegmentIndex: 0,
+      isPlaying: true
+    }));
+    setError(null);
+  }, [stopAudio, story?.title]);
+
   useEffect(() => {
     if (playback.isPlaying && story) {
       playSegment(playback.currentSegmentIndex);
@@ -397,6 +428,8 @@ const App: React.FC = () => {
           onSegmentClick={(idx) => {
             setPlayback(p => ({ ...p, currentSegmentIndex: idx, isPlaying: true }));
           }}
+          onStopAudio={stopAudio}
+          onReplaceContent={handleReplaceContent}
         />
       )}
 
